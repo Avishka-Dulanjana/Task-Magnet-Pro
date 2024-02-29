@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
-// import { SnackbarProvider } from "notistack";
-// import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import About from "./components/About";
-// import EmployeeDashBoard from "./components/Employee/EmployeeDashBoard";
-// import MyTask from "./components/Employee/MyTask";
-// import Profile from "./components/Employee/Profile";
-// import SubmitTask from "./components/Employee/SubmitTask";
-// import AllTasks from "./components/Employer/AllTasks";
-// import CreateTask from "./components/Employer/CreateTask";
-// import EmployeeList from "./components/Employer/EmployeeList";
-// import EmployerDashBoard from "./components/Employer/EmployerDashBoard";
-// import WelcomeNote from "./components/Employer/WelcomeNote";
-// import Login from "./components/Login";
-// import SignUp from "./components/SignUp";
-// import Contact from "./components/Contact";
+import { SnackbarProvider } from "notistack";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import About from "./components/About";
+import EmployeeDashBoard from "./components/Employee/EmployeeDashBoard";
+import MyTask from "./components/Employee/MyTask";
+import Profile from "./components/Employee/Profile";
+import SubmitTask from "./components/Employee/SubmitTask";
+import AllTasks from "./components/Employer/AllTasks";
+import CreateTask from "./components/Employer/CreateTask";
+import EmployeeList from "./components/Employer/EmployeeList";
+import EmployerDashBoard from "./components/Employer/EmployerDashBoard";
+import WelcomeNote from "./components/Employer/WelcomeNote";
+import Login from "./components/Login";
+import SignUp from "./components/SignUp";
+import Contact from "./components/Contact";
 
 function App() {
   // const [currentUserRole, setCurrentUserRole] = useState(
@@ -24,8 +24,7 @@ function App() {
   // }, []);
   return (
     <>
-        <div>Welcome Task Magnet Pro - Efficiency Tracker</div>
-      {/*<SnackbarProvider maxSnack={3} autoHideDuration={3000}>*/}
+      <SnackbarProvider maxSnack={3} autoHideDuration={3000}>*/}
       {/*  <BrowserRouter>*/}
       {/*    <Routes>*/}
       {/*      <Route path="/" element={<Login />} />*/}
@@ -154,7 +153,7 @@ function App() {
       {/*      /!* )} *!/*/}
       {/*    </Routes>*/}
       {/*  </BrowserRouter>*/}
-      {/*</SnackbarProvider>*/}
+      {/*</SnackbarProvider>
     </>
   );
 }
