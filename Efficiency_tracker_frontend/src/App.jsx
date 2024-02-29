@@ -24,136 +24,136 @@ function App() {
   // }, []);
   return (
     <>
-      <SnackbarProvider maxSnack={3} autoHideDuration={3000}>*/}
-      {/*  <BrowserRouter>*/}
-      {/*    <Routes>*/}
-      {/*      <Route path="/" element={<Login />} />*/}
-      {/*      <Route path="/register" element={<SignUp />} />*/}
-      {/*      <Route*/}
-      {/*        path="/dashboard-employer"*/}
-      {/*        element={*/}
-      {/*          <EmployerDashBoard*/}
-      {/*            children={*/}
-      {/*              <>*/}
-      {/*                <WelcomeNote />*/}
-      {/*                <AllTasks />*/}
-      {/*              </>*/}
-      {/*            }*/}
-      {/*          />*/}
-      {/*        }*/}
-      {/*      />{" "}*/}
-      {/*      <Route*/}
-      {/*        path="/dashboard-employee"*/}
-      {/*        element={*/}
-      {/*          <EmployeeDashBoard*/}
-      {/*            children={*/}
-      {/*              <>*/}
-      {/*                <WelcomeNote />*/}
-      {/*                <MyTask />*/}
-      {/*              </>*/}
-      {/*            }*/}
-      {/*          />*/}
-      {/*        }*/}
-      {/*      />*/}
-      {/*      /!* {currentUserRole === "Employer" && ( *!/*/}
-      {/*        <>*/}
-      {/*          <Route*/}
-      {/*            path="/create-task"*/}
-      {/*            element={*/}
-      {/*              <EmployerDashBoard*/}
-      {/*                children={*/}
-      {/*                  <>*/}
-      {/*                    <CreateTask />*/}
-      {/*                  </>*/}
-      {/*                }*/}
-      {/*              />*/}
-      {/*            }*/}
-      {/*          />*/}
-      {/*          <Route*/}
-      {/*            path="/all-tasks"*/}
-      {/*            element={*/}
-      {/*              <EmployerDashBoard*/}
-      {/*                children={*/}
-      {/*                  <>*/}
-      {/*                    <AllTasks />*/}
-      {/*                  </>*/}
-      {/*                }*/}
-      {/*              />*/}
-      {/*            }*/}
-      {/*          />*/}
-      {/*          <Route*/}
-      {/*            path="/employees"*/}
-      {/*            element={*/}
-      {/*              <EmployerDashBoard*/}
-      {/*                children={*/}
-      {/*                  <>*/}
-      {/*                    <EmployeeList />*/}
-      {/*                  </>*/}
-      {/*                }*/}
-      {/*              />*/}
-      {/*            }*/}
-      {/*          />*/}
-      {/*          <Route*/}
-      {/*            path="/about"*/}
-      {/*            element={<EmployerDashBoard children={<About />} />}*/}
-      {/*          />*/}
-      {/*          <Route*/}
-      {/*            path="/contact"*/}
-      {/*            element={<EmployerDashBoard children={<Contact />} />}*/}
-      {/*          />*/}
-      {/*        </>*/}
-      {/*      /!* )} *!/*/}
-      {/*      /!* {currentUserRole === "Employee" && ( *!/*/}
-      {/*        <>*/}
-      {/*          <Route*/}
-      {/*            path="/my-tasks"*/}
-      {/*            element={*/}
-      {/*              <EmployeeDashBoard*/}
-      {/*                children={*/}
-      {/*                  <>*/}
-      {/*                    <MyTask />*/}
-      {/*                  </>*/}
-      {/*                }*/}
-      {/*              />*/}
-      {/*            }*/}
-      {/*          />*/}
-      {/*          <Route*/}
-      {/*            path="/submit-task"*/}
-      {/*            element={*/}
-      {/*              <EmployeeDashBoard*/}
-      {/*                children={*/}
-      {/*                  <>*/}
-      {/*                    <SubmitTask />*/}
-      {/*                  </>*/}
-      {/*                }*/}
-      {/*              />*/}
-      {/*            }*/}
-      {/*          />*/}
-      {/*          <Route*/}
-      {/*            path="/profile"*/}
-      {/*            element={*/}
-      {/*              <EmployeeDashBoard*/}
-      {/*                children={*/}
-      {/*                  <>*/}
-      {/*                    <Profile />*/}
-      {/*                  </>*/}
-      {/*                }*/}
-      {/*              />*/}
-      {/*            }*/}
-      {/*          />*/}
-      {/*          <Route*/}
-      {/*            path="/about"*/}
-      {/*            element={<EmployeeDashBoard children={<About />} />}*/}
-      {/*          />*/}
-      {/*          <Route*/}
-      {/*            path="/contact"*/}
-      {/*            element={<EmployeeDashBoard children={<Contact />} />}*/}
-      {/*          />*/}
-      {/*        </>*/}
-      {/*      /!* )} *!/*/}
-      {/*    </Routes>*/}
-      {/*  </BrowserRouter>*/}
-      {/*</SnackbarProvider>
+      <SnackbarProvider maxSnack={3} autoHideDuration={3000}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/register" element={<SignUp />} />
+            <Route
+              path="/dashboard-employer"
+              element={
+                <EmployerDashBoard
+                  children={
+                    <>
+                      <WelcomeNote />
+                      <AllTasks />
+                    </>
+                  }
+                />
+              }
+            />{" "}
+            <Route
+              path="/dashboard-employee"
+              element={
+                <EmployeeDashBoard
+                  children={
+                    <>
+                      <WelcomeNote />
+                      <MyTask />
+                    </>
+                  }
+                />
+              }
+            />
+            {/* {currentUserRole === "Employer" && ( */}
+              <>
+                <Route
+                  path="/create-task"
+                  element={
+                    <EmployerDashBoard
+                      children={
+                        <>
+                          <CreateTask />
+                        </>
+                      }
+                    />
+                  }
+                />
+                <Route
+                  path="/all-tasks"
+                  element={
+                    <EmployerDashBoard
+                      children={
+                        <>
+                          <AllTasks />
+                        </>
+                      }
+                    />
+                  }
+                />
+                <Route
+                  path="/employees"
+                  element={
+                    <EmployerDashBoard
+                      children={
+                        <>
+                          <EmployeeList />
+                        </>
+                      }
+                    />
+                  }
+                />
+                <Route
+                  path="/about"
+                  element={<EmployerDashBoard children={<About />} />}
+                />
+                <Route
+                  path="/contact"
+                  element={<EmployerDashBoard children={<Contact />} />}
+                />
+              </>
+            {/* )} */}
+            {/* {currentUserRole === "Employee" && ( */}
+              <>
+                <Route
+                  path="/my-tasks"
+                  element={
+                    <EmployeeDashBoard
+                      children={
+                        <>
+                          <MyTask />
+                        </>
+                      }
+                    />
+                  }
+                />
+                <Route
+                  path="/submit-task"
+                  element={
+                    <EmployeeDashBoard
+                      children={
+                        <>
+                          <SubmitTask />
+                        </>
+                      }
+                    />
+                  }
+                />
+                <Route
+                  path="/profile"
+                  element={
+                    <EmployeeDashBoard
+                      children={
+                        <>
+                          <Profile />
+                        </>
+                      }
+                    />
+                  }
+                />
+                <Route
+                  path="/about"
+                  element={<EmployeeDashBoard children={<About />} />}
+                />
+                <Route
+                  path="/contact"
+                  element={<EmployeeDashBoard children={<Contact />} />}
+                />
+              </>
+            {/* )} */}
+          </Routes>
+        </BrowserRouter>
+      </SnackbarProvider>
     </>
   );
 }
