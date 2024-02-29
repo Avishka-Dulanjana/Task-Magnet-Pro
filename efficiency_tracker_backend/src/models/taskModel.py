@@ -1,18 +1,16 @@
 class Task:
-    def __init__(self, userId, taskName, desc,  submissionDate, attachment=None, isTaskComplete=False, isTaskStart=False, isPause=False, startTime=None, lastStartTime=None, endTime=None, spendTime=0, additionalInfo=None, feedBack=None, submitted=False, submittedFiles=None):
+    def __init__(self, userId,employerId,taskMonitorId, taskSubmissionId,taskName, description, attachment=None, isTaskComplete=False, isTaskStart=False, isPause=False, additionalInfo=None, feedBack=None, createdDate = None, createdBy = None):
         self.userId = userId
+        self.employerId = employerId
+        self.taskMonitorId = taskMonitorId
+        self.taskSubmissionId = taskSubmissionId
         self.taskName = taskName
-        self.desc = desc
-        self.submissionDate = submissionDate
+        self.description = description
         self.attachment = attachment
         self.isTaskComplete = isTaskComplete
         self.isTaskStart = isTaskStart
         self.isPause = isPause
-        self.startTime = startTime
-        self.lastStartTime = lastStartTime
-        self.endTime = endTime
-        self.spendTime = spendTime
         self.additionalInfo = additionalInfo
         self.feedBack = feedBack
-        self.submitted = submitted
-        self.submittedFiles = submittedFiles
+        self.createdDate = createdDate
+        self.createdBy = createdBy
