@@ -36,7 +36,7 @@ function App() {
                   children={
                     <>
                       <WelcomeNote />
-                      <AllTasks />
+                      {/* <AllTasks /> */}
                     </>
                   }
                 />
@@ -44,16 +44,16 @@ function App() {
             />{" "}
             <Route
               path="/dashboard-employee"
-              element={
-                <EmployeeDashBoard
-                  children={
-                    <>
-                      <WelcomeNote />
-                      <MyTask />
-                    </>
-                  }
-                />
-              }
+              // element={
+              //   <EmployeeDashBoard
+              //     children={
+              //       <>
+              //         <WelcomeNote />
+              //         {/* <MyTask /> */}
+              //       </>
+              //     }
+              //   />
+              // }
             />
             {/* {currentUserRole === "Employer" && ( */}
               <>
@@ -63,7 +63,7 @@ function App() {
                     <EmployerDashBoard
                       children={
                         <>
-                          <CreateTask />
+                          {/* <CreateTask /> */}
                         </>
                       }
                     />
@@ -75,7 +75,7 @@ function App() {
                     <EmployerDashBoard
                       children={
                         <>
-                          <AllTasks />
+                          {/* <AllTasks /> */}
                         </>
                       }
                     />
@@ -87,25 +87,25 @@ function App() {
                     <EmployerDashBoard
                       children={
                         <>
-                          <EmployeeList />
+                          {/* <EmployeeList /> */}
                         </>
                       }
                     />
                   }
                 />
-                <Route
+                {/* <Route
                   path="/about"
                   element={<EmployerDashBoard children={<About />} />}
                 />
                 <Route
                   path="/contact"
                   element={<EmployerDashBoard children={<Contact />} />}
-                />
+                /> */}
               </>
             {/* )} */}
             {/* {currentUserRole === "Employee" && ( */}
               <>
-                <Route
+                {/* <Route
                   path="/my-tasks"
                   element={
                     <EmployeeDashBoard
@@ -116,8 +116,8 @@ function App() {
                       }
                     />
                   }
-                />
-                <Route
+                /> */}
+                {/* <Route
                   path="/submit-task"
                   element={
                     <EmployeeDashBoard
@@ -128,8 +128,8 @@ function App() {
                       }
                     />
                   }
-                />
-                <Route
+                /> */}
+                {/* <Route
                   path="/profile"
                   element={
                     <EmployeeDashBoard
@@ -140,15 +140,15 @@ function App() {
                       }
                     />
                   }
-                />
-                <Route
+                /> */}
+                {/* <Route
                   path="/about"
                   element={<EmployeeDashBoard children={<About />} />}
                 />
                 <Route
                   path="/contact"
                   element={<EmployeeDashBoard children={<Contact />} />}
-                />
+                /> */}
               </>
             {/* )} */}
           </Routes>
