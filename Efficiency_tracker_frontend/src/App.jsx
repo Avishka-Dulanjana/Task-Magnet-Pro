@@ -4,14 +4,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import About from "./components/About";
 // import EmployeeDashBoard from "../components/Employee/EmployeeDashBoard";
 import MyTask from "./components/Employee/MyTask";
-// import Profile from "./components/Employee/Profile";
-<<<<<<< HEAD
+import Profile from "./components/Employee/Profile";
 import SubmitTask from "./components/Employee/SubmitTask";
 import AllTasks from "./components/Employer/AllTasks";
-=======
-// import SubmitTask from "./components/Employee/SubmitTask";
-// import AllTasks from "./components/Employer/AllTasks";
->>>>>>> c6d0061723b1edcafcabd23e468d522ad0db7958
+import SubmitTask from "./components/Employee/SubmitTask";
+import AllTasks from "./components/Employer/AllTasks";
+// c6d0061723b1edcafcabd23e468d522ad0db7958
 import CreateTask from "./components/Employer/CreateTask";
 import EmployeeList from "./components/Employer/EmployeeList";
 import EmployerDashBoard from "./components/Employer/EmployerDashBoard";
