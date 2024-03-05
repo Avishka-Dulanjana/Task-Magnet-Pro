@@ -11,7 +11,7 @@ from src.controllers.userController import find_all
 
 taskCtrl = Blueprint('task', __name__)
 
-
+# create task
 @taskCtrl.route('/create', methods=['POST'])
 def create_task():
     data = request.json
@@ -22,3 +22,10 @@ def create_task():
     result = db.tasks.insert_one(task.__dict__)
 
     return json.dumps({'taskId': result.inserted_id}, default=str)
+
+# view all task based on employee
+@taskCtrl.route('/', methods=['GET'])
+def find_all():
+    cursor = db.tasks.find()
+    result = [document for document in cursor]
+    return json.dumps(result, default=str)
