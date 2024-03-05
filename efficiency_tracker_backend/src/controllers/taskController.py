@@ -29,3 +29,12 @@ def find_all():
     cursor = db.tasks.find()
     result = [document for document in cursor]
     return json.dumps(result, default=str)
+
+# View relevant task when click 
+@taskCtrl.route('/find_by_id', methods=['GET'])
+def find_by_id():
+    data = request.args.get('id')
+
+    result = db.tasks.find_one({'_id':  ObjectId(data)})
+
+    return json.dumps(result, default=str)
