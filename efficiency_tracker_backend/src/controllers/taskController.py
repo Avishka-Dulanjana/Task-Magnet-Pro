@@ -38,3 +38,16 @@ def find_by_id():
     result = db.tasks.find_one({'_id':  ObjectId(data)})
 
     return json.dumps(result, default=str)
+
+@taskCtrl.route('/find_by_user', methods=['GET'])
+def find_by_user():
+    data = request.args.get('user')
+
+    cursor = db.tasks.find({'userId': data})
+    result = [document for document in cursor]
+    env_var = os.environ.get('UPLOAD_FOLDER')
+
+    # Add env_var key-value pair to each document in the result array
+    for document in result:
+        document['path_to_file'] = env_var
+    return json.dumps(result, default=str)
