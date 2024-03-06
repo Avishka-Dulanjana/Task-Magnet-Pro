@@ -39,7 +39,7 @@ def find_by_id():
 
     return json.dumps(result, default=str)
 
-
+# search tasks by user
 @taskCtrl.route('/find_by_user', methods=['GET'])
 def find_by_user():
     data = request.args.get('user')
@@ -53,7 +53,7 @@ def find_by_user():
         document['path_to_file'] = env_var
     return json.dumps(result, default=str)
 
-
+# update feedback
 @taskCtrl.route('/update_feedback', methods=['PUT'])
 def update_feedback():
     data = request.get_json()
@@ -65,7 +65,7 @@ def update_feedback():
 
     return json.dumps({'acknowledged': result.acknowledged}, default=str)
 
-
+# update additional info
 @taskCtrl.route('/additional_info', methods=['PUT'])
 def additional_info():
     data = request.get_json()
