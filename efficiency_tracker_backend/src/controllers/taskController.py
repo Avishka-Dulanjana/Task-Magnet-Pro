@@ -39,6 +39,7 @@ def find_by_id():
 
     return json.dumps(result, default=str)
 
+
 @taskCtrl.route('/find_by_user', methods=['GET'])
 def find_by_user():
     data = request.args.get('user')
@@ -51,3 +52,15 @@ def find_by_user():
     for document in result:
         document['path_to_file'] = env_var
     return json.dumps(result, default=str)
+
+
+@taskCtrl.route('/update_feedback', methods=['PUT'])
+def update_feedback():
+    data = request.get_json()
+    task_id = data['id']
+    feedback = data['feedback']
+
+    result = db.tasks.update_one({'_id': ObjectId(task_id)}, {
+                                 '$set': {'feedback': feedback}})
+
+    return json.dumps({'acknowledged': result.acknowledged}, default=str)
