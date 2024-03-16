@@ -5,7 +5,6 @@ import { baseURL } from "../apiURL";
 import { useSnackbar } from "notistack";
 
 const Login = () => {
-  console.log("log")
   const [loginData, setLoginData] = useState({});
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
