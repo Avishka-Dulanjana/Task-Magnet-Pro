@@ -27,6 +27,7 @@ function App() {
   // useEffect(() => {
   //   setCurrentUserRole(localStorage.getItem("role"));
   // }, []);
+  
   return (
     <>
       <SnackbarProvider maxSnack={3} autoHideDuration={3000}>
