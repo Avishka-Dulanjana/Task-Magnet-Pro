@@ -8,7 +8,7 @@ const Licensing = () => {
           Licensing Information
         </h2>
         <p className="mt-4 text-lg text-gray-800 leading-relaxed">
-          Efficiency Tracker software is licensed under the Apache License,
+          Task Magnet Pro software is licensed under the Apache License,
           Version 2.0.
         </p>
         <p className="mt-4 text-lg text-gray-800 leading-relaxed">
@@ -28,7 +28,7 @@ const Licensing = () => {
         </p>
         <p className="mt-4 text-lg text-gray-800 leading-relaxed">
           If you have any questions or concerns regarding our licensing, please
-          contact us at licensing@efficiencytracker.com.
+          contact us at licensing@taskpagnetpro.com.
         </p>
       </div>
     </div>

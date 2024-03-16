@@ -103,7 +103,7 @@ const TaskDetailsDialog = ({ open, onClose, task }) => {
           )}
           {task.task.feedBack && (
             <Typography variant="body1" gutterBottom>
-              <strong>Feedback:</strong> {task.task.feedBack}
+              <strong>FeedBack:</strong> {task.task.feedBack}
             </Typography>
           )}
         </DialogContentText>

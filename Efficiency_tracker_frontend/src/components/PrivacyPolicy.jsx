@@ -8,7 +8,7 @@ const PrivacyPolicy = () => {
           Privacy Policy
         </h2>
         <p className="mt-4 text-lg text-gray-800 leading-relaxed">
-          At Efficiency Tracker, we take your privacy seriously. This Privacy
+          At Task Magnet Pro, we take your privacy seriously. This Privacy
           Policy explains how we collect, use, and disclose your personal
           information when you use our website or services.
         </p>
@@ -38,7 +38,7 @@ const PrivacyPolicy = () => {
         </p>
         <p className="mt-4 text-lg text-gray-800 leading-relaxed">
           Contact Us: If you have any questions or concerns about our Privacy
-          Policy, please contact us at privacy@efficiencytracker.com.
+          Policy, please contact us at privacy@taskmagnetpro.com.
         </p>
       </div>
     </div>

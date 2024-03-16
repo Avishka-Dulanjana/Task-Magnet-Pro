@@ -18,7 +18,7 @@ const Login = () => {
 
   const login = async () => {
     const data = loginData;
-    console.log(data)
+
     await axios
       .post(`${baseURL}/auth/login`, data)
       .then((res) => {
