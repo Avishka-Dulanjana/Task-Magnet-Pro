@@ -8,6 +8,7 @@ import {
   Button,
   TextField,
   IconButton,
+  Typography,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import axios from "axios";
@@ -25,121 +26,85 @@ const TaskDetailsDialog = ({ open, onClose, task }) => {
   };
 
   const getUser = async () => {
-    await axios
-      .get(`${baseURL}/user/find`, {
+    try {
+      const response = await axios.get(`${baseURL}/user/find`, {
         params: { user: task.userId },
-      })
-      .then((res) => {
-        if (res.status == 200) {
-          setName(res.data.username);
-        }
-      })
-      .catch((err) => console.log(err));
+      });
+      setName(response.data.username);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const submitFeedback = async () => {
-    await axios
-      .put(`${baseURL}/task/update_feedback`, {
+    try {
+      await axios.put(`${baseURL}/task/update_feedback`, {
         id: task._id,
         feedback: feedback,
-      })
-      .then((res) => {
-        if (res.status == 200) {
-          enqueueSnackbar("Feedback submitted.", {
-            variant: "success",
-          });
-          onClose();
-        }
-      })
-      .catch((err) => console.log(err));
+      });
+      enqueueSnackbar("Feedback submitted.", {
+        variant: "success",
+      });
+      onClose();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
     getUser();
   }, []);
 
-  let statusColor = "text-gray-500";
-  let status = "todo";
-  if (task.isTaskStart && !task.isPause) {
-    statusColor = "text-yellow-500";
-    status = "in progress";
-  } else if (task.isPause) {
-    statusColor = "text-orange-500";
-    status = "paused";
-  } else if (task.isTaskComplete) {
-    statusColor = "text-green-500";
-    status = "completed";
-  } else {
-    statusColor = "text-gray-500";
-    status = "todo";
-  }
   const formatTime = (time) => {
-    const hours = Math.floor(time / 3600)
-      .toString()
-      .padStart(2, "0");
-    const minutes = Math.floor((time % 3600) / 60)
-      .toString()
-      .padStart(2, "0");
-    const seconds = Math.floor(time % 60)
-      .toString()
-      .padStart(2, "0");
+    const hours = Math.floor(time / 3600).toString().padStart(2, "0");
+    const minutes = Math.floor((time % 3600) / 60).toString().padStart(2, "0");
+    const seconds = Math.floor(time % 60).toString().padStart(2, "0");
     return `${hours}:${minutes}:${seconds}`;
   };
+
   return (
     <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
-      <DialogTitle id="alert-dialog-title">
-        <span className="font-bold">{task.taskName}</span>
-        <IconButton
-          aria-label="close"
-          onClick={onClose}
-          sx={{
-            position: "absolute",
-            right: 8,
-            top: 8,
-            color: (theme) => theme.palette.grey[500],
-          }}
-        >
+      <DialogTitle>
+        <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
+          {task.taskName}
+        </Typography>
+        <IconButton onClick={onClose} sx={{ position: "absolute", right: 0, top: 0 }}>
           <CloseIcon />
         </IconButton>
       </DialogTitle>
-      <DialogContent className="space-y-4">
-        <DialogContentText className="space-y-2">
-          <p>
-            Description: <strong>{task.desc}</strong>
-          </p>
-          <p>
-            Submission Date: <strong>{task.submissionDate}</strong>
-          </p>
-          <p>
-            Status:{" "}
-            <strong className={statusColor}>{status.toUpperCase()}</strong>
-          </p>
-          <p>
-            Employee Name: <strong>{name}</strong>
-          </p>
-          <p>
-            Time spend: <strong>{formatTime(task.spendTime)}</strong>
-          </p>
-          <p>
-            Additional Info:{" "}
-            <strong>{task.additionalInfo ? task.additionalInfo : "-"}</strong>
-          </p>
+      <DialogContent dividers>
+        <DialogContentText>
+          <Typography variant="body1" gutterBottom>
+            <strong>Description:</strong> {task.desc}
+          </Typography>
+          <Typography variant="body1" gutterBottom>
+            <strong>Submission Date:</strong> {task.submissionDate}
+          </Typography>
+          <Typography variant="body1" gutterBottom>
+            <strong>Status:</strong>{" "}
+            <span style={{ color: task.isTaskComplete ? "#4CAF50" : task.isTaskStart ? "#FFC107" : "#FF9800" }}>
+              {task.isTaskComplete ? "Completed" : task.isTaskStart ? "In Progress" : "Paused"}
+            </span>
+          </Typography>
+          <Typography variant="body1" gutterBottom>
+            <strong>Employee Name:</strong> {name}
+          </Typography>
+          <Typography variant="body1" gutterBottom>
+            <strong>Time Spend:</strong> {formatTime(task.spendTime)}
+          </Typography>
+          <Typography variant="body1" gutterBottom>
+            <strong>Additional Info:</strong> {task.additionalInfo || "-"}
+          </Typography>
           {task.submittedFiles && (
-            <p>
-              Submitted Files:{" "}
-              <Link
-                target="_blank"
-                className="font-bold"
-                to={task.submittedFiles}
-              >
-                See Submitted Files
-              </Link>
-            </p>
+            <Typography variant="body1" gutterBottom>
+              <strong>Submitted Files:</strong>{" "}
+              <Link target="_blank" to={task.submittedFiles}>See Submitted Files</Link>
+            </Typography>
           )}
           {task.feedback && (
-            <p>
-              Feedback: <strong>{task.feedback}</strong>
-            </p>
+            <Typography variant="body1" gutterBottom>
+              <strong>Feedback:</strong> {task.feedback}
+            </Typography>
           )}
         </DialogContentText>
         {task.submitted && task.feedback == null && (
@@ -151,6 +116,7 @@ const TaskDetailsDialog = ({ open, onClose, task }) => {
             variant="outlined"
             value={feedback}
             onChange={handleFeedbackChange}
+            sx={{ mt: 2 }}
           />
         )}
       </DialogContent>
@@ -159,10 +125,9 @@ const TaskDetailsDialog = ({ open, onClose, task }) => {
           <Button onClick={onClose}>Close</Button>
           <Button
             variant="contained"
-            disabled={status !== "completed"}
+            disabled={!task.isTaskComplete}
             onClick={() => {
               submitFeedback(feedback);
-              onClose();
             }}
           >
             Submit Feedback

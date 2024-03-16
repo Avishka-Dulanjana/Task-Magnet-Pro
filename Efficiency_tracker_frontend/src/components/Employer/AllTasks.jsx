@@ -31,7 +31,7 @@ const AllTasks = () => {
 
 export default AllTasks;
 
-const Task = ({ task, getAllTasks }) => {
+const Task = ({ task,getAllTasks }) => {
   const [open, setOpen] = useState(false);
   return (
     <>
