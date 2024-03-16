@@ -39,6 +39,16 @@ def find_by_id():
 
     return json.dumps(result, default=str)
 
+@taskCtrl.route('/find_by_status', methods=['GET'])
+def find_by_status():
+    data = request.args.get('user')
+
+    cursor = db.tasks.find(
+        {'userId': data, 'isTaskComplete': True, 'submitted': False})
+    result = [document for document in cursor]
+
+    return json.dumps(result, default=str)
+
 # search tasks by user
 @taskCtrl.route('/find_by_user', methods=['GET'])
 def find_by_user():
@@ -77,3 +87,4 @@ def additional_info():
                                  '$set': {'additionalInfo': info, 'submittedFiles': submittedFiles, 'submitted': True}})
 
     return json.dumps({'acknowledged': result.acknowledged}, default=str)
+
