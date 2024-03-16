@@ -27,10 +27,10 @@ const MyTask = () => {
 
   return (
     <>
-      <PageHeader title={"Your Tasks"} />
+      <PageHeader title={"My Tasks"} />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 m-4">
         {tasks.map((task) => (
-          <TaskCard task={task} key={task._id} getAllTasks={getAllTasks} />
+          <TaskCard task={task} key={task.task._id} getAllTasks={getAllTasks} />
         ))}
       </div>
     </>
@@ -39,13 +39,13 @@ const MyTask = () => {
 const TaskCard = ({ task, getAllTasks }) => {
   let statusColor = "bg-gray-500";
   let status = "todo";
-  if (task.isTaskStart && !task.isPause) {
+  if (task.task.isTaskStart && !task.task.isPause) {
     statusColor = "bg-yellow-500";
     status = "in progress";
-  } else if (task.isPause) {
+  } else if (task.task.isPause) {
     statusColor = "bg-orange-500";
     status = "paused";
-  } else if (task.isTaskComplete) {
+  } else if (task.task.isTaskComplete) {
     statusColor = "bg-green-500";
     status = "completed";
   } else {
@@ -62,7 +62,7 @@ const TaskCard = ({ task, getAllTasks }) => {
     setOpen(true);
   };
 
-  const [timerCount, setTimerCount] = useState(task.spendTime || 0);
+  const [timerCount, setTimerCount] = useState(task.task_monitor.spendTime || 0);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
   const intervalRef = useRef(null);
 
@@ -102,7 +102,7 @@ const TaskCard = ({ task, getAllTasks }) => {
     clearInterval(intervalRef.current);
     setIsTimerRunning(false);
     playSound();
-    setTimerCount(task.spendTime);
+    setTimerCount(task.task_monitor.spendTime);
   };
 
   const formatTime = (time) => {
@@ -143,10 +143,10 @@ const TaskCard = ({ task, getAllTasks }) => {
         onClick={handleOpen}
       >
         <div className="px-6 py-4 space-y-2">
-          <div className="font-bold text-xl mb-2">{task.taskName}</div>
-          <p className="text-gray-700 text-base font-semibold">{`Due Date : ${task.submissionDate}`}</p>
+          <div className="font-bold text-xl mb-2">{task.task.taskName}</div>
+          <p className="text-gray-700 text-base font-semibold">{`Due Date : ${task.task.estimateDate}`}</p>
           <p className="text-gray-700 text-base overflow-hidden whitespace-nowrap overflow-ellipsis">
-            {task.desc}
+            {task.task.description}
           </p>
         </div>
         <div className="px-6 py-2 space-y-2">

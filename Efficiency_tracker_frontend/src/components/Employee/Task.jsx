@@ -37,7 +37,7 @@ const Task = ({
   const taskStart = async () => {
     await axios
       .post(`${baseURL}/task/start`, {
-        id: task._id,
+        id: task.task._id,
         startTime: getFormattedDate(),
       })
       .then((res) => {
@@ -60,7 +60,7 @@ const Task = ({
   const taskPause = async () => {
     await axios
       .post(`${baseURL}/task/pause`, {
-        id: task._id,
+        id: task.task._id,
         pauseTime: getFormattedDate(),
       })
       .then((res) => {
@@ -83,7 +83,7 @@ const Task = ({
   const continueTask = async () => {
     await axios
       .post(`${baseURL}/task/start_pause`, {
-        id: task._id,
+        id: task.task._id,
         startTime: getFormattedDate(),
       })
       .then((res) => {
@@ -107,7 +107,7 @@ const Task = ({
   const stopTask = async () => {
     await axios
       .post(`${baseURL}/task/end`, {
-        id: task._id,
+        id: task.task._id,
         endTime: getFormattedDate(),
       })
       .then((res) => {
@@ -130,7 +130,7 @@ const Task = ({
   return (
     <Dialog open={open} onClose={handleClose} fullWidth>
       <DialogTitle id="alert-dialog-title">
-        <span className="font-bold">{task.taskName}</span>
+        <span className="font-bold">{task.task.taskName}</span>
         <IconButton
           aria-label="close"
           onClick={handleClose}
@@ -157,16 +157,16 @@ const Task = ({
             />
             <div>
               {" "}
-              <p className="text-gray-700 text-xl mb-2">{task.desc}</p>
+              <p className="text-gray-700 text-xl mb-2">{task.task.description}</p>
               <p className="text-gray-900 text-xl font-medium mb-2">
-                Due: {task.submissionDate}
+                Due: {task.task.estimateDate}
               </p>
             </div>
           </div>
           <div className="p-4">
-            {task.attachment && (
+            {task.task.attachment && (
               <Link
-                to={task.attachment}
+                to={task.task.attachment}
                 className="text-blue-500 hover:underline"
                 target={"_blank"}
               >
@@ -178,17 +178,17 @@ const Task = ({
               <span>Task status : </span>
               <span className="font-semibold">{status.toUpperCase()}</span>
             </div>
-            {task.feedback && <div>
-              <span>Task Feedback : </span>
-              <span className="font-semibold">{task.feedback}</span>
+            {task.task.feedBack && <div>
+              <span>Task FeedBack : </span>
+              <span className="font-semibold">{task.task.feedBack}</span>
             </div>}
             <div className="flex justify-between mt-4">
-              {!task.isTaskStart ? (
+              {!task.task.isTaskStart ? (
                 <button
                   onClick={() => {
                     taskStart();
                   }}
-                  disabled={task.isTaskComplete || task.isTaskStart}
+                  disabled={task.task.isTaskComplete || task.task.isTaskStart}
                   className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded cursor-pointer"
                 >
                   Start
@@ -199,7 +199,7 @@ const Task = ({
                     continueTask();
                   }}
                   disabled={
-                    task.isTaskComplete || (task.isTaskStart && !task.isPause)
+                    task.task.isTaskComplete || (task.task.isTaskStart && !task.task.isPause)
                   }
                   className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded cursor-pointer"
                 >
@@ -212,7 +212,7 @@ const Task = ({
                   taskPause();
                 }}
                 disabled={
-                  task.isTaskComplete || task.isPause || !task.isTaskStart
+                  task.task.isTaskComplete || task.task.isPause || !task.task.isTaskStart
                 }
                 className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded cursor-pointer"
               >
@@ -220,7 +220,7 @@ const Task = ({
               </button>
               <button
                 onClick={() => stopTask()}
-                disabled={task.isTaskComplete || !task.isTaskStart}
+                disabled={task.task.isTaskComplete || !task.task.isTaskStart}
                 className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded cursor-pointer"
               >
                 Stop
