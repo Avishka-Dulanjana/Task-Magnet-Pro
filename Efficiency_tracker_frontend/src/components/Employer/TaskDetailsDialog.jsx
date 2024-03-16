@@ -17,12 +17,12 @@ import { useSnackbar } from "notistack";
 import { Link } from "react-router-dom";
 
 const TaskDetailsDialog = ({ open, onClose, task }) => {
-  const [feedback, setFeedback] = useState("");
+  const [feedBack, setFeedBack] = useState("");
   const [name, setName] = useState("");
   const { enqueueSnackbar } = useSnackbar();
 
   const handleFeedbackChange = (e) => {
-    setFeedback(e.target.value);
+    setFeedBack(e.target.value);
   };
 
   const getUser = async () => {
@@ -40,7 +40,7 @@ const TaskDetailsDialog = ({ open, onClose, task }) => {
     try {
       await axios.put(`${baseURL}/task/update_feedback`, {
         id: task._id,
-        feedback: feedback,
+        feedBack: feedBack,
       });
       enqueueSnackbar("Feedback submitted.", {
         variant: "success",
@@ -66,7 +66,7 @@ const TaskDetailsDialog = ({ open, onClose, task }) => {
     <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
       <DialogTitle>
         <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-          {task.taskName}
+          {task.task.taskName}
         </Typography>
         <IconButton onClick={onClose} sx={{ position: "absolute", right: 0, top: 0 }}>
           <CloseIcon />
@@ -75,59 +75,59 @@ const TaskDetailsDialog = ({ open, onClose, task }) => {
       <DialogContent dividers>
         <DialogContentText>
           <Typography variant="body1" gutterBottom>
-            <strong>Description:</strong> {task.desc}
+            <strong>Description:</strong> {task.task.description}
           </Typography>
           <Typography variant="body1" gutterBottom>
-            <strong>Submission Date:</strong> {task.submissionDate}
+            <strong>Submission Date:</strong> {task.task_submission.submissionDate}
           </Typography>
           <Typography variant="body1" gutterBottom>
             <strong>Status:</strong>{" "}
-            <span style={{ color: task.isTaskComplete ? "#4CAF50" : task.isTaskStart ? "#FFC107" : "#FF9800" }}>
-              {task.isTaskComplete ? "Completed" : task.isTaskStart ? "In Progress" : "Paused"}
+            <span style={{ color: task.task.isTaskComplete ? "#4CAF50" : task.task.isTaskStart ? "#FFC107" : "#FF9800" }}>
+              {task.task.isTaskComplete ? "Completed" : task.task.isTaskStart ? "In Progress" : "Paused"}
             </span>
           </Typography>
           <Typography variant="body1" gutterBottom>
             <strong>Employee Name:</strong> {name}
           </Typography>
           <Typography variant="body1" gutterBottom>
-            <strong>Time Spend:</strong> {formatTime(task.spendTime)}
+            <strong>Time Spend:</strong> {formatTime(task.task_monitor.spendTime)}
           </Typography>
           <Typography variant="body1" gutterBottom>
-            <strong>Additional Info:</strong> {task.additionalInfo || "-"}
+            <strong>Additional Info:</strong> {task.task.additionalInfo || "-"}
           </Typography>
-          {task.submittedFiles && (
+          {task.task_submission.submittedFiles && (
             <Typography variant="body1" gutterBottom>
               <strong>Submitted Files:</strong>{" "}
-              <Link target="_blank" to={task.submittedFiles}>See Submitted Files</Link>
+              <Link target="_blank" to={task.task_submission.submittedFiles}>See Submitted Files</Link>
             </Typography>
           )}
-          {task.feedback && (
+          {task.task.feedBack && (
             <Typography variant="body1" gutterBottom>
-              <strong>Feedback:</strong> {task.feedback}
+              <strong>Feedback:</strong> {task.task.feedBack}
             </Typography>
           )}
         </DialogContentText>
-        {task.submitted && task.feedback == null && (
+        {task.task_submission.isSubmitted && task.task.feedBack == null && (
           <TextField
-            label="Feedback"
+            label="FeedBack"
             fullWidth
             multiline
             rows={4}
             variant="outlined"
-            value={feedback}
+            value={feedBack}
             onChange={handleFeedbackChange}
             sx={{ mt: 2 }}
           />
         )}
       </DialogContent>
-      {task.submitted && task.feedback == null && (
+      {task.task_submission.isSubmitted && task.task.feedBack == null && (
         <DialogActions>
           <Button onClick={onClose}>Close</Button>
           <Button
             variant="contained"
-            disabled={!task.isTaskComplete}
+            disabled={!task.task.isTaskComplete}
             onClick={() => {
-              submitFeedback(feedback);
+              submitFeedback(feedBack);
             }}
           >
             Submit Feedback

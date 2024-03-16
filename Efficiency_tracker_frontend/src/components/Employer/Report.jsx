@@ -15,29 +15,30 @@ const columns = [
     { id: 'id', label: 'Employee Id', minWidth: 170 },
     { id: 'name', label: 'Employee Name', minWidth: 170 },
     { id: 'task', label: 'Task Name', minWidth: 170 },
-    {id: 'estimationTime', label: 'Estimation Time', minWidth: 170},
+    {id: 'estimationDate', label: 'Estimation Date', minWidth: 170},
+    {id: 'submittedDate', label: 'Submitted Date', minWidth: 170},
     {id: 'spendTime', label: 'Spend Time', minWidth: 170},
     {id: 'efficiency', label: 'Efficiency', minWidth: 170},
 ];
 
-function createData(id,name, task, estimationTime, spendTime,efficiency) {
+function createData(id,name, task, estimationDate,submittedDate, spendTime,efficiency) {
     // const density = population / size;
-    return { id,name, task, estimationTime, spendTime,efficiency };
+    return { id,name, task, estimationDate,submittedDate, spendTime,efficiency };
 }
 
 const rows = [
-    createData('215g23fgg5sd4g', 'Nimal', "task One", "12:12:12","11:11:11",'75%'),
-    createData('215g23fgg5sd4g', 'Nimal', "task One", "12:12:12","11:11:11",'75%'),
-    createData('215g23fgg5sd4g', 'Nimal', "task One", "12:12:12","11:11:11",'75%'),
-    createData('215g23fgg5sd4g', 'Nimal', "task One", "12:12:12","11:11:11",'75%'),
-    createData('215g23fgg5sd4g', 'Nimal', "task One", "12:12:12","11:11:11",'75%'),
-    createData('215g23fgg5sd4g', 'Nimal', "task One", "12:12:12","11:11:11",'75%'),
-    createData('215g23fgg5sd4g', 'Nimal', "task One", "12:12:12","11:11:11",'75%'),
-    createData('215g23fgg5sd4g', 'Nimal', "task One", "12:12:12","11:11:11",'75%'),
-    createData('215g23fgg5sd4g', 'Nimal', "task One", "12:12:12","11:11:11",'75%'),
-    createData('215g23fgg5sd4g', 'Nimal', "task One", "12:12:12","11:11:11",'75%'),
-    createData('215g23fgg5sd4g', 'Nimal', "task One", "12:12:12","11:11:11",'75%'),
-    createData('215g23fgg5sd4g', 'Nimal', "task One", "12:12:12","11:11:11",'75%'),
+    createData('C0001', 'Nimal', "task One", "2024-04-16","2024-04-20","13:13",'75%'),
+    createData('C0002', 'Kamal', "task Two", "2024-04-16","2024-04-20","10:10",'80%'),
+    createData('C0003', 'Amaya', "task Three", "2024-04-16","2024-04-20","09:12",'75%'),
+    createData('C0004', 'Bihara', "task Four", "2024-04-16","2024-04-20","08:12",'55%'),
+    createData('C0005', 'Methmini', "task Five", "2024-04-16","2024-04-20","08:14",'70%'),
+    createData('C0006', 'Chanali', "task Six", "2024-04-16","2024-04-20","12:30",'89%'),
+    createData('C0007', 'Dinithi', "task Seven", "2024-04-16","2024-04-20","10:15",'65%'),
+    createData('C0008', 'Sanduni', "task Eight", "2024-04-16","2024-04-20","13:45",'59%'),
+    createData('C0009', 'Prageeth', "task Nine", "2024-04-16","2024-04-20","14:14",'67%'),
+    createData('C00010', 'Tharindu', "task Ten", "2024-04-16","2024-04-20","13:12",'81%'),
+    createData('C00011', 'Kaveesha', "task Eleven", "2024-04-16","2024-04-20","14:12",'52%'),
+    createData('C00012', 'Akash', "task Twelve", "2024-04-16","2024-04-20","12:15",'95%'),
 ];
 
 const Report = () => {
@@ -64,7 +65,7 @@ const Report = () => {
 
     return (
         <>
-            <PageHeader title={"Report"} />
+            <PageHeader title={"Efficiency Report"} />
 
             <Paper sx={{ width: '100%', overflow: 'hidden' }}>
                 <TableContainer sx={{ maxHeight: 440 }}>
@@ -75,7 +76,7 @@ const Report = () => {
                                     <TableCell
                                         key={column.id}
                                         align={column.align}
-                                        style={{ minWidth: column.minWidth }}
+                                        style={{ minWidth: column.minWidth, backgroundColor:"lightskyblue",fontWeight:"bold",fontFamily:"cursive" }}
                                     >
                                         {column.label}
                                     </TableCell>

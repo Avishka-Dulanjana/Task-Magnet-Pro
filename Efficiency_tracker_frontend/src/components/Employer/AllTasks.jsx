@@ -20,7 +20,7 @@ const AllTasks = () => {
 
   return (
     <>
-      <PageHeader title={"All Task"} />
+      <PageHeader title={"All Tasks"} />
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 m-4">
         {tasks.map((task) => (
           <Task task={task} getAllTasks={getAllTasks} />
