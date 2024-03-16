@@ -2,30 +2,31 @@ import React from "react";
 
 const About = () => {
   return (
-    <div className="bg-gray-100">
-      <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-extrabold text-gray-900">
+    <div className="bg-gradient-to-br from-blue-200 to-blue-500 py-12">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 bg-black bg-opacity-20 rounded-lg shadow-md py-8">
+        <h2 className="text-4xl font-bold text-gray-900 mb-8">
           About Efficiency Tracker
         </h2>
-        <p className="mt-4 text-lg text-gray-600">
-          As a ongoing start-up business in recent times , we envision the
-          intelligent upgrade of the WORKING FROM HOME SYSTEM; Consequently
-          inspiring World towards matching global standers in effective problem
-          solving via technology.{" "}
+        <p className="mt-4 text-lg text-gray-800 leading-relaxed">
+          Welcome to Efficiency Tracker, your premier platform for optimizing
+          remote work efficiency.
         </p>
-        <p className="mt-4 text-lg text-gray-600">
-          The EfficiencyTracker is a platform that facilitates a real time
-          connection between the remote employees and the their employers
-          ,enabling mutual engagement for the delivering the good service and
-          manage the time effectively{" "}
+        <p className="mt-4 text-lg text-gray-800 leading-relaxed">
+          At Efficiency Tracker, we're committed to revolutionizing the remote
+          work experience. Our mission is to provide organizations of all sizes
+          with the tools they need to thrive in a digital workplace environment.
         </p>
-        <p className="mt-4 text-lg text-gray-600">
-          Efficiency Tracker is the ideal solution for organizations of all
-          sizes and industries, from small startups to large corporations.
-          Whether you're looking to improve employee productivity, optimize
-          business processes, or gain a better understanding of how your
-          employees are performing, Efficiency Tracker can help you achieve your
-          goals.
+        <p className="mt-4 text-lg text-gray-800 leading-relaxed">
+          Our platform facilitates seamless communication and collaboration
+          between remote employees and their employers. By leveraging cutting-edge
+          technology, we empower teams to deliver exceptional results and achieve
+          their goals.
+        </p>
+        <p className="mt-4 text-lg text-gray-800 leading-relaxed">
+          Whether you're a small startup or a large corporation, Efficiency
+          Tracker offers tailored solutions to meet your needs. From enhancing
+          productivity to streamlining processes, we're here to support your
+          journey to success.
         </p>
       </div>
     </div>

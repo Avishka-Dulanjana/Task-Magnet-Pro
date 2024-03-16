@@ -2,16 +2,14 @@ import React from "react";
 import EmployerHeader from "./EmployerHeader";
 import Footer from "../Footer";
 
-const EmployerDashBoard = ({ children }) => {
+const EmployerDashboard = ({ children }) => {
   return (
-    <div className="h-screen">
+    <div className="flex flex-col min-h-screen">
       <EmployerHeader />
-      <div className="h-screen">{children}</div>
-      <div className="fixed bottom-0 w-full">
-        <Footer />
-      </div>
+      <main className="flex-1 overflow-y-auto">{children}</main>
+      <Footer />
     </div>
   );
 };
 
-export default EmployerDashBoard;
+export default EmployerDashboard;

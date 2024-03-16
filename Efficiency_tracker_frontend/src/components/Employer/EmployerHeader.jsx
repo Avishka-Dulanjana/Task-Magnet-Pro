@@ -2,25 +2,27 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const EmployerHeader = () => {
-
   const navigate = useNavigate();
-  const logout = () =>{
-    localStorage.setItem('role', undefined);
-    localStorage.clear()
-    navigate('/')
-  }
+
+  const logout = () => {
+    localStorage.setItem("role", undefined);
+    localStorage.clear();
+    navigate("/");
+  };
+
   return (
-    <>
-      <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-blue-700 mb-3">
-        <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
-          <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
+    <nav className="bg-blue-700 shadow-md">
+      <div className="container mx-auto px-4">
+        <div className="flex justify-between items-center py-4">
+          <div className="flex items-center">
             <Link
-              className="text-lg font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white"
               to="/dashboard-employer"
+              className="text-white text-lg font-bold uppercase tracking-wider"
             >
               Task Magnet Pro
             </Link>
           </div>
+<<<<<<< HEAD
           <div
             className={"lg:flex flex-grow items-center flex"}
             id="example-navbar-danger"
@@ -66,10 +68,33 @@ const EmployerHeader = () => {
                 </button>
               </li>
             </ul>
+=======
+          <div className="flex items-center space-x-6">
+            <NavLink to="/create-task">Create Task</NavLink>
+            <NavLink to="/employees">Employees</NavLink>
+            <NavLink to="/all-tasks">All Tasks</NavLink>
+            <button
+              onClick={logout}
+              className="text-white font-bold uppercase hover:opacity-75"
+            >
+              Log out
+            </button>
+>>>>>>> 2bdf1128ec0d41b521549ba790cd422c70831566
           </div>
         </div>
-      </nav>
-    </>
+      </div>
+    </nav>
+  );
+};
+
+const NavLink = ({ to, children }) => {
+  return (
+    <Link
+      to={to}
+      className="text-white hover:opacity-75 transition duration-300 ease-in-out"
+    >
+      {children}
+    </Link>
   );
 };
 
