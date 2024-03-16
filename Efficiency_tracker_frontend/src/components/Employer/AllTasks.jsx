@@ -6,6 +6,7 @@ import TaskDetailsDialog from "./TaskDetailsDialog";
 
 const AllTasks = () => {
   const [tasks, setTasks] = useState([]);
+
   useEffect(() => {
     getAllTasks();
   }, []);
@@ -32,11 +33,29 @@ const AllTasks = () => {
 export default AllTasks;
 
 const Task = ({ task,getAllTasks }) => {
+
   const [open, setOpen] = useState(false);
+  const [name, setName] = useState('');
+
+  useEffect(()=>{
+    const getEmployeeName = async (id) => {
+      try {
+        const response = await axios.get(`${baseURL}/user/find?user=${id}`);
+        if (response.data) {
+          setName(response.data.username);
+
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  },[task.userId])
+
+
   return (
     <>
       <div
-        key={task._id}
+        key={task.task._id}
         className="p-4 bg-gray-200 rounded-lg shadow-lg"
         onClick={() => setOpen(true)}
       >
@@ -44,25 +63,31 @@ const Task = ({ task,getAllTasks }) => {
           <div className="flex items-center">
             <img
               src={`https://picsum.photos/id/1/150`}
-              alt={task.employeeName}
-              className="w-16 h-216 rounded-full mr-2"
+              alt={'name'}
+              className="w-16 h-216 rounded-full mr-2 me-2"
             />
-            <span className="text-xl font-bold">{task.employeeName}</span>
+            <span className="text-xl font-bold">{name}</span>
+          </div>
+          <div className="flex items-center gap-">
+            <span className="text-base font-semibold">
+              {"Estimation Date : "}
+            </span>
+            <span className="text-sm font-bold">{task.task.estimateDate}</span>
           </div>
           <div className="flex items-center gap-2">
             <span className="text-base font-semibold">
               {"Submission Date : "}
             </span>
-            <span className="text-xl font-bold">{task.submissionDate}</span>
+            <span className="text-sm font-bold">{task.task_monitor.endDate}</span>
           </div>
         </div>
         <div className="mb-4">
           <div className="flex items-center gap-2">
             <span className="text-base font-semibold">{"Task Name : "}</span>
-            <span className="text-xl font-bold">{task.taskName}</span>
+            <span className="text-xl font-bold">{task.task.taskName}</span>
           </div>
           <div className="flex items-center gap-2">
-            <p className="text-sm text-gray-600 font-bold">{task.description}</p>
+            <p className="text-sm text-gray-600 font-bold">{task.task.description}</p>
           </div>
         </div>
       </div>

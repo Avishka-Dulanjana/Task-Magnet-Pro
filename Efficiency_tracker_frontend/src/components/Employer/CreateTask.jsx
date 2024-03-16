@@ -21,7 +21,8 @@ const CreateTask = () => {
       taskName,
       description,
       attachment:attachment,
-      createdDate:dueDate,
+      createdDate:Date.now(),
+      estimateDate:dueDate,
       createdBy:localStorage.getItem("name")
     };
 
