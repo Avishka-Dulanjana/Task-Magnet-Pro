@@ -9,7 +9,7 @@ const CreateTask = () => {
   // define state variables for form fields
   const [employee, setEmployee] = useState("");
   const [taskName, setTaskName] = useState("");
-  const [desc, setDesc] = useState("");
+  const [description, setDescription] = useState("");
   const [attachment, setAttachment] = useState("");
   const [dueDate, setDueDate] = useState("");
   const { enqueueSnackbar } = useSnackbar();
@@ -17,10 +17,12 @@ const CreateTask = () => {
   const createTask = () => {
     const data = {
       userId: employee,
+      employerId:localStorage.getItem("user"),
       taskName,
-      desc,
-      submissionDate: dueDate,
-      attachment:attachment
+      description,
+      attachment:attachment,
+      createdDate:dueDate,
+      createdBy:localStorage.getItem("name")
     };
 
     axios
@@ -90,14 +92,14 @@ const CreateTask = () => {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="desc" className="block text-gray-700 font-bold mb-2">
+          <label htmlFor="description" className="block text-gray-700 font-bold mb-2">
             Task Description
           </label>
           <textarea
-            id="desc"
-            name="desc"
-            value={desc}
-            onChange={(e) => setDesc(e.target.value)}
+            id="description"
+            name="description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>

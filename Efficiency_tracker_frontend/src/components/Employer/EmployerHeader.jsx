@@ -18,7 +18,7 @@ const EmployerHeader = () => {
               className="text-lg font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white"
               to="/dashboard-employer"
             >
-              Efficiency Tracker
+              Task Magnet Pro
             </Link>
           </div>
           <div
@@ -48,6 +48,14 @@ const EmployerHeader = () => {
                   to="/all-tasks"
                 >
                   <span className="ml-2 text-base">All Tasks</span>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                    className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+                    to="/report"
+                >
+                  <span className="ml-2 text-base">Report</span>
                 </Link>
               </li>
               <li className="nav-item">

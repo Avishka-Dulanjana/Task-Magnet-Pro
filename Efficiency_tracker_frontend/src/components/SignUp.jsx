@@ -40,7 +40,7 @@ const SignUp = () => {
       <div className="flex justify-center h-screen w-screen items-center">
         <div className="w-full md:w-1/2 flex flex-col items-center ">
           <h1 className="text-center text-2xl font-bold text-gray-600 mb-6">
-            SIGNUP
+            Task Magnet Pro SignUp
           </h1>
           <div className="w-3/4 mb-6">
             <input
@@ -103,7 +103,7 @@ const SignUp = () => {
               to="/"
               className="text-indigo-400 hover:text-blue-500 no-underline hover:underline cursor-pointer transition ease-in duration-300"
             >
-              Login
+              Sign In
             </Link>
           </p>
         </div>

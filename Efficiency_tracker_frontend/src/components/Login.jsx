@@ -5,6 +5,7 @@ import { baseURL } from "../apiURL";
 import { useSnackbar } from "notistack";
 
 const Login = () => {
+  console.log("log")
   const [loginData, setLoginData] = useState({});
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
@@ -18,12 +19,14 @@ const Login = () => {
 
   const login = async () => {
     const data = loginData;
+    console.log(data)
     await axios
       .post(`${baseURL}/auth/login`, data)
       .then((res) => {
         if (res.status === 200) {
           localStorage.setItem("role", res.data.role);
           localStorage.setItem("user", res.data._id);
+          localStorage.setItem("name", res.data.username);
           if (res.data.role === "employer") {
             navigate("/dashboard-employer");
           } else if (res.data.role === "employee") {
@@ -40,12 +43,13 @@ const Login = () => {
         console.log(err.response);
       });
   };
+
   return (
     <div className="bg-gray-10 ">
       <div className="flex justify-center h-screen w-screen items-center">
         <div className="w-full md:w-1/2 flex flex-col items-center ">
           <h1 className="text-center text-2xl font-bold text-gray-600 mb-6">
-            Efficiency Tracker Login
+            Task Magnet Pro Login
           </h1>
           <div className="w-3/4 mb-6">
             <input
@@ -76,7 +80,7 @@ const Login = () => {
               onClick={() => login()}
             >
               {" "}
-              LOGIN
+              SIGNIN
             </button>
             {/* </Link> */}
           </div>

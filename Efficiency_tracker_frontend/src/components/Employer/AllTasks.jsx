@@ -62,7 +62,7 @@ const Task = ({ task, getAllTasks }) => {
             <span className="text-xl font-bold">{task.taskName}</span>
           </div>
           <div className="flex items-center gap-2">
-            <p className="text-sm text-gray-600 font-bold">{task.desc}</p>
+            <p className="text-sm text-gray-600 font-bold">{task.description}</p>
           </div>
         </div>
       </div>

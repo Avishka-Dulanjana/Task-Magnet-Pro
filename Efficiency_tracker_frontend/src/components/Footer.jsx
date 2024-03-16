@@ -8,7 +8,7 @@ const Footer = () => {
         <span className="text-sm text-white sm:text-center ">
           © 2024{" "}
           <Link to="/dashboard" className="hover:underline">
-            Efficiency Tracker
+            Task Magnet Pro
           </Link>
           . All Rights Reserved.
         </span>
