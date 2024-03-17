@@ -1,5 +1,5 @@
 class TaskMonitor:
-    def __init__(self, userId,taskId,assignedDate = None, startDate = None,startTime = None, endDate = None, endTime=None, spendTime = None):
+    def __init__(self, userId,taskId,assignedDate = None, startDate = None,startTime = None, endDate = None, endTime=None, spendTime = 0):
         self.userId = userId
         self.taskId = taskId
         self.assignedDate = assignedDate
