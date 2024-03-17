@@ -47,7 +47,7 @@ const SubmitTask = () => {
   const submitInfo = () => {
     axios
       .put(`${baseURL}/task/additional_info`, {
-        id: taskDetails._id,
+        id: taskDetails.task._id,
         info: info,
         submittedFiles:files
       })
@@ -80,8 +80,8 @@ const SubmitTask = () => {
           >
             <option value="">Select a task</option>
             {tasks.map((task) => (
-              <option value={task._id} key={task._id}>
-                {task.taskName}
+              <option value={task.task._id} key={task.task._id}>
+                {task.task.taskName}
               </option>
             ))}
           </select>
@@ -91,18 +91,18 @@ const SubmitTask = () => {
         <div className="flex flex-col space-y-2">
           <p className="text-lg font-medium">Task Details:</p>
           <p className="text-gray-600">
-            Task Name: <strong>{taskDetails.taskName}</strong>
+            Task Name: <strong>{taskDetails.task.taskName}</strong>
           </p>
           <p className="text-gray-600">
-            Description: <strong>{taskDetails.desc}</strong>
+            Description: <strong>{taskDetails.task.description}</strong>
           </p>
           <p className="text-gray-600">
-            Submission Date: <strong>{taskDetails.submissionDate}</strong>
+            Submission Date: <strong>{taskDetails.task_submission.submissionDate}</strong>
           </p>
           <p className="text-gray-600">
             Task Status:{" "}
             <strong>
-              {taskDetails.isTaskComplete ? "Completed" : "Not Completed"}
+              {taskDetails.task.isTaskComplete ? "Completed" : "Not Completed"}
             </strong>
           </p>
         </div>
