@@ -9,6 +9,7 @@ const SubmitTask = () => {
   const [taskDetails, setTaskDetails] = useState({});
   const [info, setInfo] = useState(null);
   const [files, setFiles] = useState(null);
+  const [isload, setIsload] = useState(false);
 
   useEffect(() => {
     getCompleteTasks();
@@ -38,6 +39,7 @@ const SubmitTask = () => {
       });
       console.log(response);
       setTaskDetails(response.data);
+      setIsload(true);
     } catch (error) {
       console.error(error);
     }
@@ -91,18 +93,18 @@ const SubmitTask = () => {
         <div className="flex flex-col space-y-2">
           <p className="text-lg font-medium">Task Details:</p>
           <p className="text-gray-600">
-            Task Name: <strong>{taskDetails.task.taskName}</strong>
+            Task Name: <strong>{!isload ? taskDetails.taskName : taskDetails.task.taskName}</strong>
           </p>
           <p className="text-gray-600">
-            Description: <strong>{taskDetails.task.description}</strong>
+            Description: <strong>{!isload ? taskDetails.description : taskDetails.task.description}</strong>
           </p>
           <p className="text-gray-600">
-            Submission Date: <strong>{taskDetails.task_submission.submissionDate}</strong>
+            Submission Date: <strong>{!isload ? taskDetails.submissionDate : taskDetails.task_submission.submissionDate}</strong>
           </p>
           <p className="text-gray-600">
             Task Status:{" "}
             <strong>
-              {taskDetails.task.isTaskComplete ? "Completed" : "Not Completed"}
+              {isload  ? "Completed" : ""}
             </strong>
           </p>
         </div>
