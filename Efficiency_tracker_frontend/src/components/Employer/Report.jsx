@@ -14,45 +14,33 @@ import TableRow from '@mui/material/TableRow';
 const columns = [
     { id: 'id', label: 'Employee Id', minWidth: 170 },
     { id: 'name', label: 'Employee Name', minWidth: 170 },
-    { id: 'task', label: 'Task Name', minWidth: 170 },
-    {id: 'estimationDate', label: 'Estimation Date', minWidth: 170},
-    {id: 'submittedDate', label: 'Submitted Date', minWidth: 170},
-    {id: 'spendTime', label: 'Spend Time', minWidth: 170},
-    {id: 'efficiency', label: 'Efficiency', minWidth: 170},
+    { id: 'assignedTaskCount', label: 'Assigned Task Count', minWidth: 170 },
+    {id: 'completedTaskCount', label: 'Completed Task Count', minWidth: 170},
+    {id: 'spendTime', label: 'Spend Time(h)', minWidth: 170},
+    {id: 'taskEfficiency', label: 'Task Efficiency(%)', minWidth: 170},
+    {id: 'employeeEfficiency', label: 'Employee Efficiency(%)', minWidth: 170},
 ];
 
-function createData(id,name, task, estimationDate,submittedDate, spendTime,efficiency) {
-    // const density = population / size;
-    return { id,name, task, estimationDate,submittedDate, spendTime,efficiency };
+function createData(id,name, assignedTaskCount, completedTaskCount,spendTime, taskEfficiency,employeeEfficiency) {
+    return { id,name, assignedTaskCount, completedTaskCount,spendTime, taskEfficiency,employeeEfficiency };
 }
-
-const rows = [
-    createData('C0001', 'Nimal', "task One", "2024-04-16","2024-04-20","13:13",'75%'),
-    createData('C0002', 'Kamal', "task Two", "2024-04-16","2024-04-20","10:10",'80%'),
-    createData('C0003', 'Amaya', "task Three", "2024-04-16","2024-04-20","09:12",'75%'),
-    createData('C0004', 'Bihara', "task Four", "2024-04-16","2024-04-20","08:12",'55%'),
-    createData('C0005', 'Methmini', "task Five", "2024-04-16","2024-04-20","08:14",'70%'),
-    createData('C0006', 'Chanali', "task Six", "2024-04-16","2024-04-20","12:30",'89%'),
-    createData('C0007', 'Dinithi', "task Seven", "2024-04-16","2024-04-20","10:15",'65%'),
-    createData('C0008', 'Sanduni', "task Eight", "2024-04-16","2024-04-20","13:45",'59%'),
-    createData('C0009', 'Prageeth', "task Nine", "2024-04-16","2024-04-20","14:14",'67%'),
-    createData('C00010', 'Tharindu', "task Ten", "2024-04-16","2024-04-20","13:12",'81%'),
-    createData('C00011', 'Kaveesha', "task Eleven", "2024-04-16","2024-04-20","14:12",'52%'),
-    createData('C00012', 'Akash', "task Twelve", "2024-04-16","2024-04-20","12:15",'95%'),
-];
 
 const Report = () => {
 
-    const [employees, setEmployees] = useState([])
-    useEffect(() => {
-        axios
-            .get(`${baseURL}/report`)
-            .then((res) => res.data && setEmployees(res.data))
-            .catch((err) => console.log(err));
-    }, []);
-
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
+    const [report, setReport] = React.useState([]);
+
+    useEffect(() => {
+        getReport();
+    }, []);
+
+    const getReport = async () => {
+        await axios
+          .get(`${baseURL}/task/report`)
+          .then((res) => res.data && setReport(res.data))
+          .catch((err) => console.log(err));
+    };
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -84,7 +72,7 @@ const Report = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {rows
+                            {report
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((row) => {
                                     return (
@@ -108,7 +96,7 @@ const Report = () => {
                 <TablePagination
                     rowsPerPageOptions={[10, 25, 100]}
                     component="div"
-                    count={rows.length}
+                    count={report.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     onPageChange={handleChangePage}

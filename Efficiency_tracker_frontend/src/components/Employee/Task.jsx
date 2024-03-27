@@ -27,18 +27,25 @@ const Task = ({
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, "0");
     const day = String(date.getDate()).padStart(2, "0");
+    const formattedDate = `${year}-${month}-${day}`;
+    return formattedDate;
+  }
+
+  function getFormattedTime() {
+    const date = new Date();
     const hours = String(date.getHours()).padStart(2, "0");
     const minutes = String(date.getMinutes()).padStart(2, "0");
     const seconds = String(date.getSeconds()).padStart(2, "0");
-    const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-    return formattedDate;
+    const formattedTime = `${hours}:${minutes}:${seconds}`;
+    return formattedTime;
   }
 
   const taskStart = async () => {
     await axios
-      .post(`${baseURL}/task/start`, {
+      .put(`${baseURL}/task/start`, {
         id: task.task._id,
-        startTime: getFormattedDate(),
+        startDate: getFormattedDate(),
+        startTime: getFormattedTime(),
       })
       .then((res) => {
         if (res.status === 200) {
@@ -59,9 +66,9 @@ const Task = ({
   };
   const taskPause = async () => {
     await axios
-      .post(`${baseURL}/task/pause`, {
+      .put(`${baseURL}/task/pause`, {
         id: task.task._id,
-        pauseTime: getFormattedDate(),
+        pauseTime: getFormattedTime(),
       })
       .then((res) => {
         if (res.status === 200) {
@@ -82,9 +89,9 @@ const Task = ({
   };
   const continueTask = async () => {
     await axios
-      .post(`${baseURL}/task/start_pause`, {
+      .put(`${baseURL}/task/start_pause`, {
         id: task.task._id,
-        startTime: getFormattedDate(),
+        startTime: getFormattedTime(),
       })
       .then((res) => {
         if (res.status === 200) {
@@ -106,9 +113,10 @@ const Task = ({
 
   const stopTask = async () => {
     await axios
-      .post(`${baseURL}/task/end`, {
+      .putt(`${baseURL}/task/end`, {
         id: task.task._id,
-        endTime: getFormattedDate(),
+        endDate: getFormattedDate(),
+        endTime: getFormattedTime(),
       })
       .then((res) => {
         if (res.status === 200) {
