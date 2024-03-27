@@ -204,19 +204,19 @@ def find_by_status():
 
     return json.dumps(user_tasks, default=str)
 
-@taskCtrl.route('/start', methods=['POST'])
+@taskCtrl.route('/start', methods=['PUT'])
 def start_task():
     data = request.json
 
-    result = db.taskMonitor.update_one({'_id': ObjectId(data['id'])}, {
-        '$set': {'startTime': data['startTime']}})
+    result = db.taskMonitor.update_one({'taskId': ObjectId(data['id'])}, {
+        '$set': {'startTime': data['startTime'], 'startDate': data['startDate']}})
     
-    db.tasks.update_one({'_id': ObjectId(data['id'])}, {
-        '$set': {'isTaskStart': True, 'lastStartTime': data['startTime']}})
+    db.tasks.update_one({'_id': ObjectId(data["id"])}, {
+        '$set': {'isTaskStart': True,'lastStartTime': data["startTime"]}})
 
     return json.dumps({'acknowledged': result.acknowledged}, default=str)
 
-@taskCtrl.route('/start_pause', methods=['POST'])
+@taskCtrl.route('/start_pause', methods=['PUT'])
 def start_pause_task():
     data = request.json
 
@@ -225,20 +225,24 @@ def start_pause_task():
 
     return json.dumps({'acknowledged': result.acknowledged}, default=str)
 
-@taskCtrl.route('/pause', methods=['POST'])
+@taskCtrl.route('/pause', methods=['PUT'])
 def pause_task():
     data = request.json
     
     doc = db.tasks.find_one({'_id': ObjectId(data["id"])})
     lTime = db.taskMonitor.find_one({'taskId': ObjectId(data["id"])})
 
-    startTime = datetime.strptime(doc['lastStartTime'], "%Y-%m-%d %H:%M:%S")
-    pauseTime = datetime.strptime(data['pauseTime'], "%Y-%m-%d %H:%M:%S")
+    startTime = datetime.strptime(doc['lastStartTime'], "%H:%M:%S")
+    pauseTime = datetime.strptime(data['pauseTime'], "%H:%M:%S")
 
-    time_diff = ((pauseTime - startTime).total_seconds()) + \
-        lTime['spendTime']
+    # time_diff = ((pauseTime - startTime).total_seconds()) + \
+    #     lTime['spendTime']
+    spendTime = float(lTime.get('spendTime', 0) or 0)
 
-    result = db.taskMonitor.update_one({'_id': ObjectId(data['id'])}, {
+    # Now perform addition
+    time_diff = ((pauseTime - startTime).total_seconds()) + spendTime
+
+    result = db.taskMonitor.update_one({'taskId': ObjectId(data['id'])}, {
         '$set': {'spendTime': time_diff}})
     
     db.tasks.update_one({'_id': ObjectId(data['id'])}, {
@@ -246,24 +250,27 @@ def pause_task():
 
     return json.dumps({'acknowledged': result.acknowledged}, default=str)
 
-@taskCtrl.route('/end', methods=['POST'])
+@taskCtrl.route('/end', methods=['PUT'])
 def end_task():
     data = request.json
 
     doc = db.tasks.find_one({'_id': ObjectId(data["id"])})
     lTime = db.taskMonitor.find_one({'taskId': ObjectId(data["id"])})
 
-    startTime = datetime.strptime(doc['lastStartTime'], "%Y-%m-%d %H:%M:%S")
-    endTime = datetime.strptime(data['endTime'], "%Y-%m-%d %H:%M:%S")
+    startTime = datetime.strptime(doc['lastStartTime'], "%H:%M:%S")
+    endTime = datetime.strptime(data['endTime'], "%H:%M:%S")
+    e = endTime.strftime("%H:%M:%S")
 
-    time_diff = ((endTime - startTime).total_seconds()) + \
-        lTime['spendTime']
+    time_diff_seconds = (endTime - startTime).total_seconds() + lTime['spendTime']
+    time_diff_hours = time_diff_seconds / 3600  # Convert seconds to hours
+    # Format time_diff_hours to two decimal places
+    time_diff_hours_formatted = "{:.2f}".format(time_diff_hours)
 
     db.tasks.update_one({'_id': ObjectId(data['id'])}, {
         '$set': {'isPause': False, 'isTaskStart': False, 'isTaskComplete': True}})
     
-    result = db.taskMonitor.update_one({'_id': ObjectId(data['id'])}, {
-        '$set': {'spendTime': time_diff, 'endTime': endTime}})
+    result = db.taskMonitor.update_one({'taskId': ObjectId(data['id'])}, {
+        '$set': {'spendTime': time_diff_hours_formatted, 'endDate': data['endDate'],'endTime': e}})
 
     return json.dumps({'acknowledged': result.acknowledged}, default=str)
 
@@ -283,3 +290,43 @@ def additional_info():
 
     return json.dumps({'acknowledged': result.acknowledged}, default=str)
 
+@taskCtrl.route('/report', methods=['GET'])
+def calculate_Efficiency():
+
+    all_employees = db.users.find({'role':'employee'})
+    result  = [document for document in all_employees]
+    
+    employees_data = []
+
+    for employee in result:
+        assignedTaskCount = db.tasks.count_documents({'userId': str(employee['_id'])})
+        completedTaskCount = db.tasks.count_documents({'userId': str(employee['_id']), 'isTaskComplete': True})
+        
+        # Calculate total spendTime using aggregation framework
+        spendTime = 0
+        for task in db.taskMonitor.find({'userId': str(employee['_id'])}):
+            spendTime += float(task.get('spendTime', 0) or 0)
+
+        # Calculate employee efficiency
+        employeeEfficiency = 0
+        if spendTime != 0:
+            employeeEfficiency = round((completedTaskCount / spendTime) * 100, 2)
+
+        if assignedTaskCount == 0:
+            taskEfficiency = 0
+        else:
+            taskEfficiency = round((completedTaskCount / assignedTaskCount) * 100, 2)
+
+        employee_response = {
+            "id": employee['_id'],
+            "name": employee['username'],
+            "assignedTaskCount": assignedTaskCount,
+            "completedTaskCount": completedTaskCount,
+            "spendTime": spendTime,
+            "employeeEfficiency": employeeEfficiency,
+            "taskEfficiency": taskEfficiency
+        }
+
+        employees_data.append(employee_response)
+
+    return json.dumps(employees_data, default=str)
